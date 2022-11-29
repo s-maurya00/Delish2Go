@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "363470621670",
+    "project_id": "food-project00",
+    "storage_bucket": "food-project00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363470621670:android:8224edb91e351e7e902427",
+        "android_client_info": {
+          "package_name": "com.example.delish2go"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363470621670-57g6n1vcqtgdr72bp19hr78g5291mkmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoQfrW7gJNlvXMNoxOS3pNPkQdQr9AvjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363470621670-57g6n1vcqtgdr72bp19hr78g5291mkmp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
