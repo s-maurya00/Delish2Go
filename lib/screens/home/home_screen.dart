@@ -1,3 +1,5 @@
+import 'package:delish2go/auth/database_manager.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:delish2go/screens/home/drawer_side.dart';
@@ -6,16 +8,25 @@ import 'package:delish2go/screens/product_overview/product_overview.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // getImage() async {
+  //   var ref =  FirebaseStorage.instance.ref().child('1.jpeg');
+  //   var url = await ref.getDownloadURL();
+  //   print(url);
+  //   return url;
+  // }
+
   Widget _buildHerbsProduct(context) {
+    List<String> imageURL = ['', '', ''];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.only(top: 40, bottom: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text('Herbs Seasonings'),
+              Text('Top Picks'),
               Text(
                 'view all',
                 style: TextStyle(color: Colors.grey),
@@ -32,71 +43,167 @@ class HomeScreen extends StatelessWidget {
                 GestureDetector(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Image.asset(
-                      'assets/1.jpeg',
-                    ),
+                    child: FutureBuilder(
+                      future: FireStoreDatabase().getData('French_Fries.jpg'),
+                      builder: (context, snapshot) {
+                        if(snapshot.hasError) {
+                          return const Text(
+                            "Something went wrong",
+                          );
+                        }
+                        if(snapshot.connectionState == ConnectionState.done) {
+                          imageURL[0] = snapshot.data.toString();
+
+                          return Image.network(
+                            snapshot.data.toString(),
+                            height: 150,
+                            width: 190,
+                            fit: BoxFit.cover,
+                          );
+                        }
+                        return const Center(child: CircularProgressIndicator(),);
+                      }),
                   ),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProductOverview(
+                            builder: (context) => ProductOverview(
                                   productImage:
-                                      "https://cdn.shopify.com/s/files/1/0279/6329/3831/products/IMG_7057_1024x1024.jpg?v=1649306527",
-                                  productName: "choco",
+                                      imageURL[0],
+                                  productName: "French Fries",
                                 )));
                   },
                 ),
                 const Text(
-                  'Food',
+                  'French Fries',
                 ),
               ]),
               Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                 GestureDetector(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Image.asset(
-                      'assets/1.jpeg',
-                    ),
+                    child: FutureBuilder(
+                      future: FireStoreDatabase().getData('Pizza.jpg'),
+                      builder: (context, snapshot) {
+                        if(snapshot.hasError) {
+                          return const Text(
+                            "Something went wrong",
+                          );
+                        }
+                        if(snapshot.connectionState == ConnectionState.done) {
+                          imageURL[1] = snapshot.data.toString();
+                          
+                          return Image.network(
+                            snapshot.data.toString(),
+                            height: 150,
+                            width: 190,
+                            fit: BoxFit.cover,
+                          );
+                        }
+                        return const Center(child: CircularProgressIndicator(),);
+                      }),
                   ),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProductOverview(
+                            builder: (context) => ProductOverview(
                                   productImage:
-                                      "https://cdn.shopify.com/s/files/1/0279/6329/3831/products/IMG_7057_1024x1024.jpg?v=1649306527",
-                                  productName: "choco",
+                                      imageURL[1],
+                                  productName: "Pizza",
                                 )));
                   },
                 ),
                 const Text(
-                  'Food',
+                  'Pizza',
                 ),
-              ]),
-              Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              ]),Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                 GestureDetector(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Image.asset(
-                      'assets/1.jpeg',
-                    ),
+                    child: FutureBuilder(
+                      future: FireStoreDatabase().getData('Burger.jpg'),
+                      builder: (context, snapshot) {
+                        if(snapshot.hasError) {
+                          return const Text(
+                            "Something went wrong",
+                          );
+                        }
+                        if(snapshot.connectionState == ConnectionState.done) {
+                          imageURL[2] = snapshot.data.toString();
+
+                          return Image.network(
+                            snapshot.data.toString(),
+                            height: 150,
+                            width: 190,
+                            fit: BoxFit.cover,
+                          );
+                        }
+                        return const Center(child: CircularProgressIndicator(),);
+                      }),
                   ),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProductOverview(
+                            builder: (context) => ProductOverview(
                                   productImage:
-                                      "https://cdn.shopify.com/s/files/1/0279/6329/3831/products/IMG_7057_1024x1024.jpg?v=1649306527",
-                                  productName: "choco",
+                                      imageURL[2],
+                                  productName: "Burger",
                                 )));
                   },
                 ),
                 const Text(
-                  'Food',
+                  'Burger',
                 ),
               ]),
+              // Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              //   GestureDetector(
+              //     child: Padding(
+              //       padding: const EdgeInsets.only(right: 8),
+              //       child: Image.asset(
+              //         'assets/1.jpeg',
+              //       ),
+              //     ),
+              //     onTap: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => const ProductOverview(
+              //                     productImage:
+              //                         "https://cdn.shopify.com/s/files/1/0279/6329/3831/products/IMG_7057_1024x1024.jpg?v=1649306527",
+              //                     productName: "choco",
+              //                   )));
+              //     },
+              //   ),
+              //   const Text(
+              //     'Food',
+              //   ),
+              // ]),
+              // Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              //   GestureDetector(
+              //     child: Padding(
+              //       padding: const EdgeInsets.only(right: 8),
+              //       child: Image.asset(
+              //         'assets/1.jpeg',
+              //       ),
+              //     ),
+              //     onTap: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => const ProductOverview(
+              //                     productImage:
+              //                         "https://cdn.shopify.com/s/files/1/0279/6329/3831/products/IMG_7057_1024x1024.jpg?v=1649306527",
+              //                     productName: "choco",
+              //                   )));
+              //     },
+              //   ),
+              //   const Text(
+              //     'Food',
+              //   ),
+              // ]),
             ],
           ),
         ),
@@ -208,6 +315,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       drawer: const DrawerSide(),
       appBar: AppBar(
@@ -320,19 +428,19 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Featured Partners'),
-                  Text(
-                    'View All',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 20, bottom: 10),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: const [
+            //       Text('Featured Partners'),
+            //       Text(
+            //         'View All',
+            //         style: TextStyle(color: Colors.grey),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -344,19 +452,19 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Restaurants Near You'),
-                  Text(
-                    'View All',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 30, bottom: 10),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: const [
+            //       Text('Restaurants Near You'),
+            //       Text(
+            //         'View All',
+            //         style: TextStyle(color: Colors.grey),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(

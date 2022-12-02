@@ -81,7 +81,7 @@ class MyProfile extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Sam Federer",
+                                          "Sushil Maurya",
                                           style: TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class MyProfile extends StatelessWidget {
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const Text("samFederer@gmail.com"),
+                                        const Text("sushil@somaiya.edu"),
                                       ],
                                     ),
                                     CircleAvatar(
